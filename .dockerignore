@@ -1,0 +1,13 @@
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+.terraform
+*.tfstate*
+node_modules
+dist
+coverage
+bin
+*.log
+README.md
