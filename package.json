@@ -1,15 +1,14 @@
 {
-  "name": "forge",
+  "name": "ares",
   "version": "0.1.0",
   "private": true,
   "workspaces": [
     "web"
   ],
   "scripts": {
-    "infra:up": "docker compose up -d",
-    "infra:down": "docker compose down",
-    "web:dev": "npm run dev --workspace @forge/web",
-    "web:build": "npm run build --workspace @forge/web"
+    "web:dev": "npm run dev --workspace @ares/web",
+    "web:build": "npm run build --workspace @ares/web",
+    "web:check": "npm run check --workspace @ares/web"
   },
   "engines": {
     "node": ">=20",

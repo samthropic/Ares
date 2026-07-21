@@ -1,34 +1,46 @@
-# Forge
+# Ares
 
-Take a Git repository in and get a deployed, monitored, self-service-managed
-service out.
+A self-healing delivery platform that takes code from commit to production,
+evaluates application and kernel-level signals, and automatically promotes or
+rolls back a progressive deployment.
 
-Forge is a self-hosted internal developer platform built around a desired-state
-reconciliation loop. This repository currently contains only the project
-scaffold and local-development configuration; application features are not yet
-implemented.
+Ares combines Kubernetes-native deployment orchestration, Prometheus metrics,
+an eBPF node agent, Terraform-managed infrastructure, and repeatable chaos
+experiments. This repository currently contains the project scaffold only;
+application behavior is intentionally not implemented yet.
+
+See the [project specification](docs/SPECIFICATION.md) for the architecture,
+component requirements, and suggested build order.
 
 ## Planned components
 
-- `backend/` — Go API server and reconciler binaries
-- `web/` — React and TypeScript dashboard
-- `database/migrations/` — PostgreSQL schema migrations
-- `observability/` — Prometheus and Grafana configuration
-- `infra/terraform/` — hosting infrastructure
+- `backend/` — Go operator, eBPF agent, CLI, API types, and decision engine
+- `config/` — CRD, RBAC, manager, and sample Kubernetes manifests
+- `deploy/kind/` — local Kubernetes cluster configuration
+- `chaos/` — Chaos Mesh experiments and verification harness
+- `database/migrations/` — PostgreSQL decision-audit migrations
+- `observability/` — Prometheus and Grafana assets
+- `infra/terraform/` — AKS, networking, and observability modules
+- `web/` — optional React and TypeScript dashboard
 - `docs/` — architecture and operating documentation
-- `scripts/` — development and automation scripts
 
 ## Local prerequisites
 
 - Go 1.23 or newer
-- Node.js 20 or newer with npm
-- Docker with Docker Compose
+- Docker
+- `kubectl`
+- `kind`
+- `make`
+- Node.js 20 or newer with npm (dashboard only)
+- Terraform (cloud checkpoint only)
 
 ## Bootstrap
 
 1. Copy `.env.example` to `.env` and adjust local values.
-2. Run `docker compose up -d` to start PostgreSQL and the local image registry.
-3. Run `npm install` to install the dashboard toolchain when frontend work begins.
+2. Run `make kind-up` to create the local Kubernetes cluster.
+3. Run `docker compose up -d postgres` if local decision-history storage is
+	needed.
+4. Run `npm install` only when dashboard work begins.
 
-The API, reconciler, dashboard source, database schema, monitoring dashboards,
-and Terraform resources are intentionally left for incremental implementation.
+The operator, agent, CRD schema, chaos tests, database schema, dashboards, and
+Terraform resources are intentionally left for staged implementation.
