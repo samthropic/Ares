@@ -1,12 +1,12 @@
-name: forge
+name: ares
 
 services:
   postgres:
     image: postgres:17-alpine
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-forge}
-      POSTGRES_USER: ${POSTGRES_USER:-forge}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-forge}
+      POSTGRES_DB: ${POSTGRES_DB:-ares}
+      POSTGRES_USER: ${POSTGRES_USER:-ares}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ares}
     ports:
       - "5432:5432"
     volumes:
@@ -18,14 +18,5 @@ services:
       retries: 10
     restart: unless-stopped
 
-  registry:
-    image: registry:2
-    ports:
-      - "5000:5000"
-    volumes:
-      - registry-data:/var/lib/registry
-    restart: unless-stopped
-
 volumes:
   postgres-data:
-  registry-data:

@@ -11,6 +11,10 @@ coverage.out
 *.test
 vendor/
 
+# eBPF build output
+*.bpf.o
+*.bpf.c.tmp
+
 # Node / React
 node_modules/
 dist/
@@ -30,6 +34,10 @@ override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
+
+# Kubernetes local state
+kubeconfig
+kubeconfig.*
 
 # Logs and temporary files
 *.log

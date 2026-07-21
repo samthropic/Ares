@@ -1,9 +1,11 @@
-# Backend
+# Ares Go components
 
-This Go module will contain two binaries:
+This module will contain three binaries:
 
-- `cmd/api` for the stateless REST API server
-- `cmd/reconciler` for the desired-state control loop
+- `cmd/operator` — the Kubernetes controller and rollout decision engine
+- `cmd/agent` — the eBPF node agent and Prometheus metrics endpoint
+- `cmd/aresctl` — the operator-facing CLI
 
-Shared packages should live under `internal/`. No backend behavior is
-implemented in the initial scaffold.
+Versioned `ProgressiveRollout` API types belong under `api/`. Controller,
+decision, metrics, and eBPF implementation packages belong under `internal/`.
+No runtime behavior is implemented in the initial scaffold.
